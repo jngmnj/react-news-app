@@ -1,16 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import NewsItem from './components/NewsItem/NewsItem'
+import { BrowserRouter, Route, Routes, useOutletContext } from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import DetailPage from "./pages/DetailPage";
+import Layout from "./components/Layout";
 
 function App() {
-
+  const category = useOutletContext();
   return (
-    <>
-      <NewsItem />
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<MainPage />} />
+          <Route path="/:category?" element={<MainPage />} />
+          <Route path="/article/:id" element={<DetailPage />} />
+          {/* <Route path="login" element={<LoginPage />} /> */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

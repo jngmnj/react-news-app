@@ -9,9 +9,17 @@ const NewsItem = ({ article }) => {
     <NewsItemBlock>
       {urlToImage && (
          <div className='thumbnail'>
-          <Link></Link>
+          <Link to={url} target='_blank'>
+            <img src={urlToImage} alt={`${title} 썸네일`} />
+          </Link>
          </div>
       )}
+      <div className="contents">
+        <h2>
+          <Link to={url} target='_blank' rel="noopener noreferrer">{title}</Link>
+        </h2>
+        <p>{description}</p>
+      </div>
     </NewsItemBlock>
   )
 }
