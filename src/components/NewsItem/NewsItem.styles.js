@@ -1,13 +1,6 @@
 import styled from "styled-components";
 import colors from "../../styles/colors";
 
-// export const CardContainer = styled.div`
-//   max-width: ${(props) => props.width}px;
-//   max-height: ${(props) => props.height}px;
-//   border-radius: ${(props) => props.borderRadius}px;
-//   margin-left: ${(props) => props.marginLeft}px;
-// `;
-
 export const NewsItemBlock = styled.div`
   display: flex;
   .thumbnail {

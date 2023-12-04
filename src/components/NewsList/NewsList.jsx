@@ -2,38 +2,36 @@ import React, {useEffect, useState} from 'react'
 import NewsItem from '../NewsItem';
 import { NewsListBlock } from './NewsList.styles';
 import axios from 'axios'
+import usePromise from '../utils/usePromise';
 
 
 const NewsList = ({ category }) => {
-    console.log("newslist", category)
-      const [articles, setArticles] = useState(null);
-      const [loading, setLoading] = useState(false);
+  const handleFetch = () => {
+    const apiKey = "f9c9929c82944e4da5e778ecdd416126";
+    const query = category === 'all' ? '' : `&category=${category}`;
+    const url = `https://newsapi.org/v2/top-headlines?country=us${query}&apiKey=${apiKey}`;
+    console.log(url)
+    return axios.get(url);
+  }
+  const [loading, response, error] = usePromise(handleFetch, [category]);
 
-      useEffect(() => {
-        const fetchData = async() => {
-            setLoading(true);
-            try {
-                const apiKey = "f9c9929c82944e4da5e778ecdd416126";
-                const query = category === 'all' ? '' : `&query=${category}`;
-                const url = `https://newsapi.org/v2/top-headlines?country=kr${query}&apiKey=${apiKey}`;
-                const response = await axios.get(url);
-                setArticles(response.data.articles);
-            } catch(e) {
-                console.log(e)
-            }
-            setLoading(false);
-        }
-        fetchData();   
-      }, [category]);
+  if(loading) {
+    // return <CardSkeleton />; // 추후 스켈레톤만들기
+    return <NewsListBlock>loading... </NewsListBlock>;
+  }
 
-      if(loading) {
-        // return <CardSkeleton />; // 추후 스켈레톤만들기
-        return <NewsListBlock>loading... </NewsListBlock>;
-      }
+  console.log("response", response)
 
-      if(!articles) {
-        return null;
-      }
+
+  if (!response) {
+    return null;
+  }
+
+  if (error) {
+    return <NewsList>에러발생!</NewsList>
+  }
+
+  const { articles } = response.data;
   
   return (
     <NewsListBlock>

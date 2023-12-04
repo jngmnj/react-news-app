@@ -1,10 +1,9 @@
-import { BrowserRouter, Route, Routes, useOutletContext } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import DetailPage from "./pages/DetailPage";
 import Layout from "./components/Layout";
 
 function App() {
-  const category = useOutletContext();
   return (
     <BrowserRouter>
       <Routes>

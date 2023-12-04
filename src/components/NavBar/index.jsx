@@ -6,10 +6,12 @@ const NavBar = ({ category, onSelect }) => {
   return (
     <CategoriesBlock>
       {categories.map((cate) => (
-        <Category 
+        <Category
           key={cate.name}
-          active={category === cate.name}  
-          onClick={() => onSelect(cate.name)}
+          // activeclassname="active"
+          className={({ isActive }) => isActive ? "active" : ""}
+          exact={cate.name === "all"}
+          to={cate.name === "all" ? "/" : `/${cate.name}`}
         >
           {cate.text}
         </Category>

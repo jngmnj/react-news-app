@@ -5,10 +5,9 @@ import { useParams } from 'react-router-dom';
 const MainPage = () => {
   const params = useParams();
   console.log("pathname", params);
-  const category = match.params.category || 'all';
 
   return (
-    <NewsList/>
+    <NewsList category={params.category}/>
   )
 }
 
